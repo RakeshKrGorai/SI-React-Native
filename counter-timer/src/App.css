@@ -1,0 +1,25 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.card {
+  padding: 2em;
+}
+
+.count-show {
+  height: 100px;
+  width: 150px;
+  margin-bottom: 25px;
+}
+
+footer {
+  font-size: 18px;
+  margin-top: 400px;
+}
+
+span {
+  color: yellow;
+}
