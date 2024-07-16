@@ -1,6 +1,18 @@
+import { useState } from "react";
 import { Text, View, Button, TextInput } from "react-native";
 
-export default function Login({ onLogin }) {
+export default function Login({ onLogin, email, password }) {
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+
+  function checkCredentials() {
+    if (email === loginEmail && password === loginPassword) {
+      onLogin();
+    } else {
+      alert("User not found with given credentials!");
+    }
+  }
+
   return (
     <View
       style={{
@@ -31,6 +43,7 @@ export default function Login({ onLogin }) {
           padding: 10,
         }}
         placeholder="Enter Email"
+        onChangeText={setLoginEmail}
       />
       <TextInput
         style={{
@@ -43,9 +56,10 @@ export default function Login({ onLogin }) {
         }}
         placeholder="Enter Password"
         secureTextEntry={true}
+        onChangeText={setLoginPassword}
       />
 
-      <Button onPress={onLogin} title="Login" color="green" />
+      <Button onPress={checkCredentials} title="Login" color="green" />
     </View>
   );
 }

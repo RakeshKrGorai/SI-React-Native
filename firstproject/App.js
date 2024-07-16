@@ -8,7 +8,8 @@ import Dashboard from "./components/Dashboard";
 export default function App() {
   const [currentPage, setCurrentPage] = useState("GettingStarted");
   const [userName, setUserName] = useState("");
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   function handleSignUp() {
     console.log("Inside handle sign up  page");
     setCurrentPage("SignUp");
@@ -26,8 +27,10 @@ export default function App() {
     setCurrentPage("GettingStarted");
   }
 
-  function handleSetName(name) {
+  function handleSetData(name, email, password) {
     setUserName(name);
+    setEmail(email);
+    setPassword(password);
     handleLogIn();
   }
 
@@ -36,8 +39,10 @@ export default function App() {
       {currentPage === "GettingStarted" && (
         <GettingStarted onSignUpPress={handleSignUp} />
       )}
-      {currentPage === "SignUp" && <SignUp onCompletion={handleSetName} />}
-      {currentPage === "Login" && <Login onLogin={handleDashboard} />}
+      {currentPage === "SignUp" && <SignUp onCompletion={handleSetData} />}
+      {currentPage === "Login" && (
+        <Login onLogin={handleDashboard} email={email} password={password} />
+      )}
       {currentPage === "Dashboard" && (
         <Dashboard onLogOut={handleLogOut} userName={userName} />
       )}

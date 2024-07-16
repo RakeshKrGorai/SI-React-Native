@@ -3,6 +3,8 @@ import { useState } from "react";
 
 export default function SignUp({ onCompletion }) {
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <View
@@ -46,6 +48,8 @@ export default function SignUp({ onCompletion }) {
           padding: 10,
         }}
         placeholder="Enter Email"
+        onChangeText={setEmail}
+        value={email}
       />
       <TextInput
         style={{
@@ -58,10 +62,12 @@ export default function SignUp({ onCompletion }) {
         }}
         placeholder="Enter Password"
         secureTextEntry={true}
+        onChangeText={setPassword}
+        value={password}
       />
 
       <Button
-        onPress={() => onCompletion(name)}
+        onPress={() => onCompletion(name, email, password)}
         title="Complete Sign Up"
         color="green"
       />
