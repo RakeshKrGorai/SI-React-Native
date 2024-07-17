@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Text, View, Button, TextInput } from "react-native";
+import { Text, View, Button, TextInput, Switch } from "react-native";
 
 export default function Login({ onLogin, email, password }) {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-
+  const [isEnabled, setIsEnabled] = useState(false);
+  const [backgroundColor, setBackgroundColor] = useState("lightgray");
   function checkCredentials() {
     if (email === loginEmail && password === loginPassword) {
       onLogin();
@@ -13,13 +14,22 @@ export default function Login({ onLogin, email, password }) {
     }
   }
 
+  // const image = require("../assets/getting-started.jpg");
+
+  const toggleSwitch = () => {
+    setIsEnabled((previousState) => !previousState);
+    setBackgroundColor((previousState) =>
+      previousState === "lightgray" ? "cyan" : "lightgray"
+    );
+  };
+
   return (
     <View
       style={{
         flex: 1,
         justifyContent: "center",
         alignItems: "stretch",
-        backgroundColor: "white",
+        backgroundColor: backgroundColor,
       }}
     >
       <Text
@@ -34,6 +44,14 @@ export default function Login({ onLogin, email, password }) {
       >
         Login Page
       </Text>
+      <Switch
+        trackColor={{ false: "#767577", true: "#81b0ff" }}
+        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+        style={{ alignSelf: "center", marginBottom: 20 }}
+      />
       <TextInput
         style={{
           fontSize: 18,
