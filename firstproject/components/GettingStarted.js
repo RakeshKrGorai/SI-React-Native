@@ -1,4 +1,5 @@
-import { Text, View, Button, ImageBackground } from "react-native";
+import { Text, View, TouchableOpacity, ImageBackground } from "react-native";
+import { Button, Card } from "react-native-paper";
 
 export default function GettingStarted({ onSignUpPress }) {
   const image = require("../assets/getting-started.jpg");
@@ -20,7 +21,7 @@ export default function GettingStarted({ onSignUpPress }) {
         <Text
           style={{
             marginLeft: 95,
-            marginBottom: 750,
+            marginBottom: 500,
             fontWeight: "bold",
             fontSize: 30,
             fontStyle: "italic",
@@ -28,7 +29,19 @@ export default function GettingStarted({ onSignUpPress }) {
         >
           Welcome to our App
         </Text>
-        <Button onPress={onSignUpPress} title="Sign Up" color="green" />
+        <Card.Actions>
+          <Button
+            onPress={onSignUpPress}
+            style={{
+              alignItems: "center",
+              marginRight: 150,
+              padding: 5,
+              borderRadius: 25,
+            }}
+          >
+            SIGN UP
+          </Button>
+        </Card.Actions>
       </ImageBackground>
     </View>
   );

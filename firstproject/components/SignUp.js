@@ -1,13 +1,13 @@
 import {
   Text,
   View,
-  Button,
   TextInput,
   ImageBackground,
   Switch,
   StyleSheet,
 } from "react-native";
 import { useState } from "react";
+import { Button, Card } from "react-native-paper";
 
 export default function SignUp({ onCompletion }) {
   const [name, setName] = useState("");
@@ -60,12 +60,19 @@ export default function SignUp({ onCompletion }) {
           onChangeText={setPassword}
           value={password}
         />
-
-        <Button
-          onPress={() => onCompletion(name, email, password)}
-          title="Complete Sign Up"
-          color="green"
-        />
+        <Card.Actions>
+          <Button
+            onPress={() => onCompletion(name, email, password)}
+            style={{
+              marginRight: 120,
+              padding: 5,
+              borderRadius: 25,
+              marginBottom: 100,
+            }}
+          >
+            Complete Sign Up
+          </Button>
+        </Card.Actions>
       </ImageBackground>
     </View>
   );
@@ -78,5 +85,6 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
+    borderRadius: 25,
   },
 });

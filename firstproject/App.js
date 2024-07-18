@@ -4,6 +4,7 @@ import GettingStarted from "./components/GettingStarted";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
+import { Provider as PaperProvider } from "react-native-paper";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState("GettingStarted");
@@ -28,6 +29,27 @@ export default function App() {
     },
     {
       id: "3",
+      title: "Google Pixel 8 Pro",
+      image:
+        "https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/e/f/m/-original-imagtwh5rbhf7ngh.jpeg?q=70&crop=false",
+      description: "12 GB RAM | 128 GB ROM",
+    },
+    {
+      id: "4",
+      title: "Google Pixel 7 Pro",
+      image:
+        "https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/b/p/s/-original-imaggsuemmztbghp.jpeg?q=70&crop=false%202x,%20https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/b/p/s/-original-imaggsuemmztbghp.jpeg?q=70&crop=false%201",
+      description: "12 GB RAM | 128 GB ROM",
+    },
+    {
+      id: "5",
+      title: "Google Pixel 8 Pro",
+      image:
+        "https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/e/f/m/-original-imagtwh5rbhf7ngh.jpeg?q=70&crop=false",
+      description: "12 GB RAM | 128 GB ROM",
+    },
+    {
+      id: "6",
       title: "Google Pixel 8 Pro",
       image:
         "https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/e/f/m/-original-imagtwh5rbhf7ngh.jpeg?q=70&crop=false",
@@ -60,17 +82,19 @@ export default function App() {
   }
 
   return (
-    <View style={{ flex: 1 }}>
-      {currentPage === "GettingStarted" && (
-        <GettingStarted onSignUpPress={handleSignUp} />
-      )}
-      {currentPage === "SignUp" && <SignUp onCompletion={handleSetData} />}
-      {currentPage === "Login" && (
-        <Login onLogin={handleDashboard} email={email} password={password} />
-      )}
-      {currentPage === "Dashboard" && (
-        <Dashboard onLogOut={handleLogOut} userName={userName} data={data} />
-      )}
-    </View>
+    <PaperProvider>
+      <View style={{ flex: 1 }}>
+        {currentPage === "GettingStarted" && (
+          <GettingStarted onSignUpPress={handleSignUp} />
+        )}
+        {currentPage === "SignUp" && <SignUp onCompletion={handleSetData} />}
+        {currentPage === "Login" && (
+          <Login onLogin={handleDashboard} email={email} password={password} />
+        )}
+        {currentPage === "Dashboard" && (
+          <Dashboard onLogOut={handleLogOut} userName={userName} data={data} />
+        )}
+      </View>
+    </PaperProvider>
   );
 }
