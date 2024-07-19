@@ -4,7 +4,9 @@ import GettingStarted from "./components/GettingStarted";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
+import Favorites from "./components/Favorites";
 import { Provider as PaperProvider } from "react-native-paper";
+import { UserProvider } from "./UserContext";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState("GettingStarted");
@@ -58,7 +60,6 @@ export default function App() {
   ];
 
   function handleSignUp() {
-    console.log("Inside handle sign up  page");
     setCurrentPage("SignUp");
   }
 
@@ -68,6 +69,10 @@ export default function App() {
 
   function handleDashboard() {
     setCurrentPage("Dashboard");
+  }
+
+  function handleFavorites() {
+    setCurrentPage("Favorites");
   }
 
   function handleLogOut() {
@@ -80,21 +85,34 @@ export default function App() {
     setPassword(password);
     handleLogIn();
   }
-
   return (
     <PaperProvider>
-      <View style={{ flex: 1 }}>
-        {currentPage === "GettingStarted" && (
-          <GettingStarted onSignUpPress={handleSignUp} />
-        )}
-        {currentPage === "SignUp" && <SignUp onCompletion={handleSetData} />}
-        {currentPage === "Login" && (
-          <Login onLogin={handleDashboard} email={email} password={password} />
-        )}
-        {currentPage === "Dashboard" && (
-          <Dashboard onLogOut={handleLogOut} userName={userName} data={data} />
-        )}
-      </View>
+      <UserProvider>
+        <View style={{ flex: 1 }}>
+          {currentPage === "GettingStarted" && (
+            <GettingStarted onSignUpPress={handleSignUp} />
+          )}
+          {currentPage === "SignUp" && <SignUp onCompletion={handleSetData} />}
+          {currentPage === "Login" && (
+            <Login
+              onLogin={handleDashboard}
+              email={email}
+              password={password}
+            />
+          )}
+          {currentPage === "Dashboard" && (
+            <Dashboard
+              onLogOut={handleLogOut}
+              onFavorites={handleFavorites}
+              userName={userName}
+              data={data}
+            />
+          )}
+          {currentPage === "Favorites" && (
+            <Favorites onDashboard={handleDashboard} />
+          )}
+        </View>
+      </UserProvider>
     </PaperProvider>
   );
 }

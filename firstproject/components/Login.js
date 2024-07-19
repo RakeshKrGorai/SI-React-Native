@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, TextInput } from "react-native";
 import { Button, Card } from "react-native-paper";
 
@@ -8,6 +8,10 @@ export default function Login({ onLogin, email, password }) {
   const [backgroundColor, setBackgroundColor] = useState("lightgray");
 
   function checkCredentials() {
+    console.log("Email : " + email);
+    console.log("LoginEmail : " + loginEmail);
+    console.log("Pass : " + password);
+    console.log("Login Pass : " + loginPassword);
     if (email === loginEmail && password === loginPassword) {
       onLogin();
     } else {
