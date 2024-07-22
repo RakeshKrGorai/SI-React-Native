@@ -1,8 +1,12 @@
 import { Text, View, TouchableOpacity, ImageBackground } from "react-native";
 import { Button, Card } from "react-native-paper";
-
-export default function GettingStarted({ onSignUpPress }) {
+import Ionicons from "@expo/vector-icons/Ionicons";
+export default function GettingStarted({ navigation }) {
   const image = require("../assets/getting-started.jpg");
+
+  const handleGotoSignUpPage = () => {
+    navigation.navigate("SignUp");
+  };
 
   return (
     <View
@@ -31,7 +35,7 @@ export default function GettingStarted({ onSignUpPress }) {
         </Text>
         <Card.Actions>
           <Button
-            onPress={onSignUpPress}
+            onPress={handleGotoSignUpPage}
             style={{
               alignItems: "center",
               marginRight: 150,

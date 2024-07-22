@@ -1,11 +1,21 @@
 import React, { useState, useContext } from "react";
 import { Text, View, TextInput } from "react-native";
 import { Button, Card } from "react-native-paper";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { useRoute } from "@react-navigation/native";
 
-export default function Login({ onLogin, email, password }) {
+export default function Login({ navigation }) {
+  const route = useRoute();
+  const name = route.params.name;
+  const email = route.params.email;
+  const password = route.params.password;
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [backgroundColor, setBackgroundColor] = useState("lightgray");
+
+  const handleGotoDashboardPage = () => {
+    navigation.navigate("Dashboard", { name });
+  };
 
   function checkCredentials() {
     console.log("Email : " + email);
@@ -13,7 +23,7 @@ export default function Login({ onLogin, email, password }) {
     console.log("Pass : " + password);
     console.log("Login Pass : " + loginPassword);
     if (email === loginEmail && password === loginPassword) {
-      onLogin();
+      handleGotoDashboardPage();
     } else {
       alert("User not found with given credentials!");
     }

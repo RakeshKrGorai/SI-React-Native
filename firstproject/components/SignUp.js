@@ -8,12 +8,17 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { Button, Card } from "react-native-paper";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
-export default function SignUp({ onCompletion }) {
+export default function SignUp({ navigation }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const image = require("../assets/getting-started.jpg");
+
+  const handleGotoLoginPage = () => {
+    navigation.navigate("Login", { name, email, password });
+  };
 
   return (
     <View
@@ -62,7 +67,7 @@ export default function SignUp({ onCompletion }) {
         />
         <Card.Actions>
           <Button
-            onPress={() => onCompletion(name, email, password)}
+            onPress={handleGotoLoginPage}
             style={{
               marginRight: 120,
               padding: 5,
