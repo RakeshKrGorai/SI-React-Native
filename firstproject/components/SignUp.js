@@ -3,12 +3,11 @@ import {
   View,
   TextInput,
   ImageBackground,
-  Switch,
   StyleSheet,
 } from "react-native";
 import { useState } from "react";
 import { Button, Card } from "react-native-paper";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function SignUp({ navigation }) {
   const [name, setName] = useState("");
@@ -16,8 +15,12 @@ export default function SignUp({ navigation }) {
   const [password, setPassword] = useState("");
   const image = require("../assets/getting-started.jpg");
 
-  const handleGotoLoginPage = () => {
-    navigation.navigate("Login", { name, email, password });
+  const handleGotoLoginPage = async () => {
+    await AsyncStorage.setItem(
+      "userData",
+      JSON.stringify({ name, email, password })
+    );
+    navigation.navigate("Login");
   };
 
   return (

@@ -1,33 +1,26 @@
 import React, { useState, useContext } from "react";
 import { Text, View, TextInput } from "react-native";
 import { Button, Card } from "react-native-paper";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { useRoute } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Login({ navigation }) {
-  const route = useRoute();
-  const name = route.params.name;
-  const email = route.params.email;
-  const password = route.params.password;
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [backgroundColor, setBackgroundColor] = useState("lightgray");
 
   const handleGotoDashboardPage = () => {
-    navigation.navigate("Dashboard", { name });
+    navigation.navigate("Dashboard");
   };
 
-  function checkCredentials() {
-    console.log("Email : " + email);
-    console.log("LoginEmail : " + loginEmail);
-    console.log("Pass : " + password);
-    console.log("Login Pass : " + loginPassword);
-    if (email === loginEmail && password === loginPassword) {
+  const checkCredentials = async () => {
+    const userDataString = await AsyncStorage.getItem("userData");
+    const userData = userDataString ? JSON.parse(userDataString) : {};
+    if (userData.email === loginEmail && userData.password === loginPassword) {
       handleGotoDashboardPage();
     } else {
       alert("User not found with given credentials!");
     }
-  }
+  };
 
   function getRandomColor() {
     const hexChars = "0123456789ABCDEF";

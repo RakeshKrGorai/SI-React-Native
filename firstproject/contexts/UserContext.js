@@ -1,4 +1,9 @@
 import React, { createContext, useState } from "react";
+import { reducer } from "../globalstate/reducer";
+
+export const initialState = {
+  favorites: [],
+};
 
 export const UserContext = createContext();
 

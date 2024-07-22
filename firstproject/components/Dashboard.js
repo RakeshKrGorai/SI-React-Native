@@ -1,17 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Text } from "react-native";
 import { ScrollView, StyleSheet } from "react-native";
 import { Card, Title, Paragraph, Button, IconButton } from "react-native-paper";
-import { UserContext } from "../UserContext";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { useRoute } from "@react-navigation/native";
+import { UserContext } from "../contexts/UserContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Dashboard = ({ navigation }) => {
-  const route = useRoute();
-  const name = route.params.name;
+  const [userName, setUserName] = useState("");
 
-  const handleGotoFavoritesPage = () => {
-    navigation.navigate("Favorites", { name });
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      const userDataString = await AsyncStorage.getItem("userData");
+      const userData = userDataString ? JSON.parse(userDataString) : {};
+      setUserName(userData.name);
+    };
+    fetchUserDetails();
+  }, []);
+  const handleGotoFavoritesPage = async () => {
+    navigation.navigate("Favorites");
   };
 
   const handleLogout = () => {
@@ -77,13 +83,12 @@ const Dashboard = ({ navigation }) => {
       <Text
         style={{
           marginLeft: 40,
-          marginTop: 50,
+          marginTop: 15,
           fontWeight: "bold",
           fontSize: 30,
-          fontStyle: "italic",
         }}
       >
-        Welcome, {name}
+        Welcome, {userName}!
       </Text>
 
       <ScrollView contentContainerStyle={styles.container}>

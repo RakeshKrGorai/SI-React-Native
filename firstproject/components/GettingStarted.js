@@ -1,6 +1,5 @@
 import { Text, View, TouchableOpacity, ImageBackground } from "react-native";
 import { Button, Card } from "react-native-paper";
-import Ionicons from "@expo/vector-icons/Ionicons";
 export default function GettingStarted({ navigation }) {
   const image = require("../assets/getting-started.jpg");
 
